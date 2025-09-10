@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "tf_state" {
-  bucket = "ss233-bucket"
+  bucket        = "ss233-bucket"
   force_destroy = false
 
   tags = {
