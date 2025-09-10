@@ -2,6 +2,7 @@ provider "aws" {
   region = "us-east-2"
 }
 
+# s3 bucket
 resource "aws_s3_bucket" "tf_state" {
   bucket        = "ss233-bucket"
   force_destroy = false
@@ -12,6 +13,7 @@ resource "aws_s3_bucket" "tf_state" {
   }
 }
 
+# bucket versioning
 resource "aws_s3_bucket_versioning" "enabled" {
   bucket = aws_s3_bucket.tf_state.id
 
@@ -20,6 +22,7 @@ resource "aws_s3_bucket_versioning" "enabled" {
   }
 }
 
+# encryption configuration
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   bucket = aws_s3_bucket.tf_state.id
 
