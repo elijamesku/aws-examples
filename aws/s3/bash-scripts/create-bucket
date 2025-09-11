@@ -1,5 +1,6 @@
+#checking for bucket name
 if [ -z "$1" ]; then
-    echo "No input variable provided."
+    echo "There needs to be a bucket name ex. ./bucket my-bucket-name."
     exit 1
 fi
 
