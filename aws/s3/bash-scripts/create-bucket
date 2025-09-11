@@ -1,0 +1,6 @@
+if [ -z "$1" ]; then
+    echo "No input variable provided."
+    exit 1
+fi
+
+aws s3api create-bucket --bucket $0
