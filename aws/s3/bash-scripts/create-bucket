@@ -4,4 +4,6 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-aws s3api create-bucket --bucket $1
+BUCKET_NAME=$1
+
+aws s3api create-bucket --bucket $BUCKET_NAME
