@@ -4,4 +4,4 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-aws s3api create-bucket --bucket $0
+aws s3api create-bucket --bucket $1
