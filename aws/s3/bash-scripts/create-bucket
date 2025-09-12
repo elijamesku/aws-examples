@@ -8,4 +8,6 @@ BUCKET_NAME=$1
 
 echo "aws s3api create-bucket --bucket $BUCKET_NAME"
 
-aws s3api create-bucket --bucket $BUCKET_NAME
+aws s3api create-bucket \
+ --bucket $BUCKET_NAME \
+ --create-bucket-configuration="LocationConstraint=ca-central-1"
