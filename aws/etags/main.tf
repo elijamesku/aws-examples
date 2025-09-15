@@ -20,7 +20,7 @@ resource "aws_s3_object" "s3_object" {
   bucket = resource.aws_s3_bucket.tf_state.id
   key    = "newfile.txt"
   source = "newfile.txt"
-  # etag = filemd5()
+  etag = filemd5("newfile.txt")
 
 
 }
