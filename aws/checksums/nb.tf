@@ -16,10 +16,11 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_object" "s3_object" {
-  bucket = resource.aws_s3_bucket.bucket.id
+  bucket = aws_s3_bucket.bucket.id
   key    = "newdoc.txt"
   source = "newdoc.txt"
-  etag = filemd5("newdoc.txt")
+  #etag   = filemd5("newdoc.txt")
+  source_hash = filemd5("newdoc.txt")
 
 
 }
