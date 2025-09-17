@@ -16,3 +16,12 @@ resource "aws_s3_bucket_versioning" "versioning" {
       status = "Enabled"
     } 
 }
+
+#creating a key and adding legal hold status to the key
+resource "aws_s3_object" "file" {
+    bucket = aws_s3_bucket.storage.id
+    key = "newdoc.txt"
+    source = "newdoc.txt"
+    object_lock_legal_hold_status = "ON"
+  
+}
