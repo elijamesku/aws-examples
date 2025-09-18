@@ -1,10 +1,10 @@
 provider "aws" {
-    region = "us-east-2"
+  region = "us-east-2"
 }
 
 data "aws_availability_zone" "chosen" {
-    name = var.az_name
-  
+  name = var.az_name
+
 }
 
 locals {
@@ -12,20 +12,20 @@ locals {
 }
 
 resource "aws_s3_directory_bucket" "news" {
-    bucket = "news-bucket"
-    location {
-      name = local.az_id
-    }
-    tags = {
-      Name = "Terraform bucket"
-      Environment= "test"
-    }
+  bucket = "news-bucket"
+  location {
+    name = local.az_id
+  }
+  tags = {
+    Name        = "Terraform bucket"
+    Environment = "test"
+  }
 
-    force_destroy = true
+  force_destroy = true
 }
 
 variable "az_name" {
-    type = string
-    description = "AZ name"
-    default = "us-east-2a"
+  type        = string
+  description = "AZ name"
+  default     = "us-east-2a"
 }
