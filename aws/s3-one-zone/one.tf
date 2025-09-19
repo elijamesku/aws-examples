@@ -8,7 +8,7 @@ variable "az_name" {
   default     = "us-east-2a"
 }
 
-# Look up the AZ ID from the AZ name
+# Looing up the AZ ID from the AZ name
 data "aws_availability_zone" "chosen" {
   name = var.az_name
 }
@@ -24,7 +24,7 @@ resource "aws_s3_directory_bucket" "news" {
 
   location {
     name = local.az_id               
-    # type = "AvailabilityZone"     
+    type = "AvailabilityZone"     
   }
 
   tags = {
