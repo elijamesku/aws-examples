@@ -6,7 +6,7 @@ provider "aws" {
 resource "aws_s3_bucket" "bucket" {
   bucket        = "policy-bucket"
   force_destroy = false
-
+#bucket tags
   tags = {
     Name        = "policy bucket"
     Environment = "dev"
@@ -14,6 +14,7 @@ resource "aws_s3_bucket" "bucket" {
 
 }
 
+#policy perms and calls
 data "aws_iam_policy_document" "bucket_policy" {
   statement {
     sid    = "AllowPublicRead"
