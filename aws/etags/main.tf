@@ -2,7 +2,7 @@
 # 09/10
 # bucket with public access block, cors cofnfig, encryption, versioning with object test
 
-#cloud provider
+# cloud provider
 provider "aws" {
   region = "us-east-2"
 }
@@ -18,7 +18,7 @@ resource "aws_s3_bucket_public_access_block" "block" {
 }
 
 
-#s3 bucket
+# s3 bucket
 resource "aws_s3_bucket" "tf_state" {
   bucket        = "ss233-bucket"
   force_destroy = false
@@ -29,7 +29,7 @@ resource "aws_s3_bucket" "tf_state" {
   }
 }
 
-#cors configuration allowing get post put for all origins for now
+# cors configuration allowing get post put for all origins for now
 resource "aws_s3_bucket_cors_configuration" "tf_state"{
    bucket = aws_s3_bucket.tf_state.id
 
@@ -53,7 +53,7 @@ resource "aws_s3_object" "s3_object" {
 
 }
 
-#bucket versioning
+# bucket versioning
 resource "aws_s3_bucket_versioning" "enabled" {
   bucket = aws_s3_bucket.tf_state.id
 
@@ -62,7 +62,7 @@ resource "aws_s3_bucket_versioning" "enabled" {
   }
 }
 
-#encryption configuration
+# encryption configuration
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   bucket = aws_s3_bucket.tf_state.id
 
