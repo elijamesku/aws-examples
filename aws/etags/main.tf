@@ -16,6 +16,21 @@ resource "aws_s3_bucket" "tf_state" {
   }
 }
 
+resource "aws_s3_bucket_cors_configuration" "tf_state"{
+  
+  bucket = aws_s3_bucket.tf_state.id
+
+   cors_rule {
+    id = "CORSRule1"
+    allowed_methods = ["GET", "PUT"]
+    allowed_origins = ["*"]
+    allowed_headers = ["*"]
+    expose_headers = ["ETag"]
+    max_age_seconds = 3000
+  }
+  
+}
+
 resource "aws_s3_object" "s3_object" {
   bucket = resource.aws_s3_bucket.tf_state.id
   key    = "newfile.txt"
