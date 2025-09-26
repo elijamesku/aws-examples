@@ -1,5 +1,6 @@
 # sd 10:24
 # 09/10
+# bucket with public access block, cors cofnfig, encryption, versioning with object test
 
 #cloud provider
 provider "aws" {
@@ -30,8 +31,7 @@ resource "aws_s3_bucket" "tf_state" {
 
 #cors configuration allowing get post put for all origins for now
 resource "aws_s3_bucket_cors_configuration" "tf_state"{
-  
-  bucket = aws_s3_bucket.tf_state.id
+   bucket = aws_s3_bucket.tf_state.id
 
    cors_rule {
     allowed_methods = ["GET", "POST", "PUT"]
