@@ -5,6 +5,17 @@ provider "aws" {
   region = "us-east-2"
 }
 
+
+resource "aws_s3_bucket_public_access_block" "block" {
+  bucket = aws_s3_bucket.tf_state.id
+  block_public_acls = true
+  block_public_policy = true
+  ignore_public_acls = true
+  restrict_public_buckets = true
+  
+}
+
+
 #s3 bucket
 resource "aws_s3_bucket" "tf_state" {
   bucket        = "ss233-bucket"
@@ -21,14 +32,13 @@ resource "aws_s3_bucket_cors_configuration" "tf_state"{
   bucket = aws_s3_bucket.tf_state.id
 
    cors_rule {
-    id = "CORSRule1"
-    allowed_methods = ["GET", "PUT"]
+    allowed_methods = ["GET", "POST", "PUT"]
     allowed_origins = ["*"]
     allowed_headers = ["*"]
     expose_headers = ["ETag"]
     max_age_seconds = 3000
   }
-  
+
 }
 
 resource "aws_s3_object" "s3_object" {
