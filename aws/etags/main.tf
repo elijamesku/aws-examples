@@ -17,6 +17,7 @@ resource "aws_s3_bucket_public_access_block" "block" {
   
 }
 
+# key set
 resource "aws_kms_key" "s3" {
   description = "CMK for s3 bucket ss233"
   deletion_window_in_days = 30
@@ -24,6 +25,7 @@ resource "aws_kms_key" "s3" {
   
 }
 
+# kms key alias
 resource "aws_kms_alias" "s3" {
   name = "alias/ss223-bucket"
   target_key_id = aws_kms_key.s3.key_id
