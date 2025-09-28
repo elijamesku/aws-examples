@@ -58,12 +58,12 @@ resource "aws_s3_bucket_cors_configuration" "tf_state"{
 
 # adding bucket object
 resource "aws_s3_object" "s3_object" {
-  bucket = resource.aws_s3_bucket.tf_state.id
+  bucket = aws_s3_bucket.tf_state.id
   key    = "newfile.txt"
+  etag   = filemd5("newfile.txt")
+  server_side_encryption = "aws:kms"
+  kms_key_id = aws_kms_key.s3.arn
   source = "newfile.txt"
-  etag = filemd5("newfile.txt")
-
-
 }
 
 # bucket versioning
@@ -81,7 +81,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
+      sse_algorithm = "aws:kms"
+      kms_master_key_id = aws_kms_key.s3.arn
     }
+    bucket_key_enabled = true
   }
 }
