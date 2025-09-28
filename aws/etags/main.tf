@@ -24,6 +24,12 @@ resource "aws_kms_key" "s3" {
   
 }
 
+resource "aws_kms_alias" "s3" {
+  name = "alias/ss223-bucket"
+  target_key_id = aws_kms_key.s3.key_id
+  
+}
+
 
 # s3 bucket
 resource "aws_s3_bucket" "tf_state" {
