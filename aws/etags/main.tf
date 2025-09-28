@@ -17,6 +17,13 @@ resource "aws_s3_bucket_public_access_block" "block" {
   
 }
 
+resource "aws_kms_key" "s3" {
+  description = "CMK for s3 bucket ss233"
+  deletion_window_in_days = 30
+  enable_key_rotation = true
+  
+}
+
 
 # s3 bucket
 resource "aws_s3_bucket" "tf_state" {
