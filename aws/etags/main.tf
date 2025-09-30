@@ -2,10 +2,12 @@
 # 09/10
 # bucket with public access block, cors cofnfig, encryption, versioning with object test
 
+
 # cloud provider
 provider "aws" {
   region = "us-east-2"
 }
+
 
 # public access block turned on for private s3
 resource "aws_s3_bucket_public_access_block" "block" {
@@ -17,6 +19,7 @@ resource "aws_s3_bucket_public_access_block" "block" {
   
 }
 
+
 # key set
 resource "aws_kms_key" "s3" {
   description = "CMK for s3 bucket ss233"
@@ -24,6 +27,7 @@ resource "aws_kms_key" "s3" {
   enable_key_rotation = true
   
 }
+
 
 # kms key alias
 resource "aws_kms_alias" "s3" {
@@ -44,6 +48,7 @@ resource "aws_s3_bucket" "tf_state" {
   }
 }
 
+
 # cors configuration allowing get post put for all origins for now
 resource "aws_s3_bucket_cors_configuration" "tf_state"{
    bucket = aws_s3_bucket.tf_state.id
@@ -58,6 +63,7 @@ resource "aws_s3_bucket_cors_configuration" "tf_state"{
 
 }
 
+
 # adding bucket object
 resource "aws_s3_object" "s3_object" {
   bucket = aws_s3_bucket.tf_state.id
@@ -68,6 +74,7 @@ resource "aws_s3_object" "s3_object" {
   source = "newfile.txt"
 }
 
+
 # bucket versioning
 resource "aws_s3_bucket_versioning" "enabled" {
   bucket = aws_s3_bucket.tf_state.id
@@ -76,6 +83,7 @@ resource "aws_s3_bucket_versioning" "enabled" {
     status = "Enabled"
   }
 }
+
 
 # encryption configuration
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
