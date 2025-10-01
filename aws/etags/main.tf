@@ -32,7 +32,6 @@ resource "aws_kms_alias" "s3" {
   
 }
 
-
 # s3 bucket
 resource "aws_s3_bucket" "tf_state" {
   bucket        = "ss233-bucket"
@@ -44,6 +43,7 @@ resource "aws_s3_bucket" "tf_state" {
   }
 }
 
+=
 # cors configuration allowing get post put for all origins for now
 resource "aws_s3_bucket_cors_configuration" "tf_state"{
    bucket = aws_s3_bucket.tf_state.id
@@ -68,6 +68,7 @@ resource "aws_s3_object" "s3_object" {
   source = "newfile.txt"
 }
 
+
 # bucket versioning
 resource "aws_s3_bucket_versioning" "enabled" {
   bucket = aws_s3_bucket.tf_state.id
@@ -76,6 +77,7 @@ resource "aws_s3_bucket_versioning" "enabled" {
     status = "Enabled"
   }
 }
+
 
 # encryption configuration
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
