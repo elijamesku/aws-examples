@@ -2,10 +2,12 @@
 # 09/10
 # bucket with public access block, cors cofnfig, encryption, versioning with object test
 
+
 # cloud provider
 provider "aws" {
   region = "us-east-2"
 }
+
 
 # public access block turned on for private s3
 resource "aws_s3_bucket_public_access_block" "block" {
@@ -17,6 +19,7 @@ resource "aws_s3_bucket_public_access_block" "block" {
   
 }
 
+
 # key set
 resource "aws_kms_key" "s3" {
   description = "CMK for s3 bucket ss233"
@@ -25,12 +28,14 @@ resource "aws_kms_key" "s3" {
   
 }
 
+
 # kms key alias
 resource "aws_kms_alias" "s3" {
   name = "alias/ss223-bucket"
   target_key_id = aws_kms_key.s3.key_id
   
 }
+
 
 # s3 bucket
 resource "aws_s3_bucket" "tf_state" {
@@ -43,7 +48,8 @@ resource "aws_s3_bucket" "tf_state" {
   }
 }
 
-=
+
+
 # cors configuration allowing get post put for all origins for now
 resource "aws_s3_bucket_cors_configuration" "tf_state"{
    bucket = aws_s3_bucket.tf_state.id
