@@ -98,7 +98,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
   }
 }
 
-## add global accelerator
+# elastic ip
 resource "aws_eip" "ga_example" {
   domain = "vpc"
   tags = {
@@ -106,3 +106,11 @@ resource "aws_eip" "ga_example" {
     Env = "test"
   }
 }
+
+#gloabal accelerator
+resource "aws_globalaccelerator_accelerator" "example" {
+  name = "example-accelerator"
+  enabled = true
+  ip_address_type = "IPV4"
+}
+
