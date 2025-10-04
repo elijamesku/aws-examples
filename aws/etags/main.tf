@@ -99,3 +99,10 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
 }
 
 ## add global accelerator
+resource "aws_eip" "ga_example" {
+  domain = "vpc"
+  tags = {
+    Name = "ga-example-eip"
+    Env = "test"
+  }
+}
