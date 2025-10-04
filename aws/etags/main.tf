@@ -124,3 +124,21 @@ resource "aws_globalaccelerator_listener" "http" {
     to_port = 80
   }
 }
+
+
+# endpoint group
+resource "aws_globalaccelerator_endpoint_group" "us_east_2" {
+  listener_arn = aws_globalaccelerator_listener.http.id
+  endpoint_group_region = "us-east-2"
+
+  health_check_port = 80
+  health_check_protocol = "TCP"
+  health_check_interval_seconds = 30
+  threshold_count = 3
+  traffic_dial_percentage = 100
+
+  endpoint_configuration {
+    endpoint_id = aws_eip.ga_example.allocation_id
+    weight = 100
+  }  
+}
