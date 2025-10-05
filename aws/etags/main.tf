@@ -19,7 +19,6 @@ resource "aws_s3_bucket_public_access_block" "block" {
   
 }
 
-
 # key set
 resource "aws_kms_key" "s3" {
   description = "CMK for s3 bucket ss233"
@@ -28,14 +27,12 @@ resource "aws_kms_key" "s3" {
   
 }
 
-
 # kms key alias
 resource "aws_kms_alias" "s3" {
   name = "alias/ss223-bucket"
   target_key_id = aws_kms_key.s3.key_id
   
 }
-
 
 # s3 bucket
 resource "aws_s3_bucket" "tf_state" {
@@ -47,8 +44,6 @@ resource "aws_s3_bucket" "tf_state" {
     Environment = "test"
   }
 }
-
-
 
 # cors configuration allowing get post put for all origins for now
 resource "aws_s3_bucket_cors_configuration" "tf_state"{
@@ -74,7 +69,6 @@ resource "aws_s3_object" "s3_object" {
   source = "newfile.txt"
 }
 
-
 # bucket versioning
 resource "aws_s3_bucket_versioning" "enabled" {
   bucket = aws_s3_bucket.tf_state.id
@@ -83,7 +77,6 @@ resource "aws_s3_bucket_versioning" "enabled" {
     status = "Enabled"
   }
 }
-
 
 # encryption configuration
 resource "aws_s3_bucket_server_side_encryption_configuration" "default" {
@@ -114,7 +107,6 @@ resource "aws_globalaccelerator_accelerator" "example" {
   ip_address_type = "IPV4"
 }
 
-
 # accelerator listener
 resource "aws_globalaccelerator_listener" "http" {
   accelerator_arn = aws_globalaccelerator_accelerator.example.id
@@ -124,7 +116,6 @@ resource "aws_globalaccelerator_listener" "http" {
     to_port = 80
   }
 }
-
 
 # endpoint group
 resource "aws_globalaccelerator_endpoint_group" "us_east_2" {
